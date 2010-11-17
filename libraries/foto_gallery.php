@@ -90,6 +90,9 @@ class Foto_gallery
         return $result;
 	}
 
+    /*
+     helper method to get out a parameter from passed in data
+    */
 	private function getParameter($data,$parameter="")
 	{
 		if (isset( $data['parameters'][$parameter])) 
