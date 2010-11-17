@@ -29,7 +29,18 @@ class Foto_gallery
 	}
 
 	// --------------------------------------------------------------------
-
+	
+	
+	/**
+	param: imagedir: you need to pass the dir without a leading slash
+	because otherwise the scandir doesnot work as expected..
+	in the link you have to add back that leading slash '/' before
+	the path to imamges
+	
+	directory structure: you need a tmb sub-directory for the thumbnails and 
+	a pids subs directory for the real pictures..
+	
+    **/
 	public function gallery($data = array())
 	{
 	  	$image_dir 	= $this->getParameter($data,'imagedir');
