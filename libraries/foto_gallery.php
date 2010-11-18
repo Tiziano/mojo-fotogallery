@@ -47,7 +47,19 @@ class Foto_gallery
 	  	
 	  	if( $image_dir== FALSE)
 	  	{
-	  		$image_dir= $filename;
+	  		return "imagedir not set";
+	  	}
+	  	
+	  	$width 	= $this->getParameter($data,'width');
+	  	if ( $width == FALSE)
+	  	{
+	  		$width = 120;
+	  	}
+	  	
+	  	$cols  = $this->getParameter($data,'cols');
+	  	if ( $cols == FALSE)
+	  	{
+	  		$cols = 5;
 	  	}
 		
 		$files1 = scandir($image_dir.'pics/');
@@ -61,22 +73,22 @@ class Foto_gallery
 			 }	    
 		}		
 		
-		$rows = 1 + ( count($files2) / 5);
+		$rows = 1 + ( count($files2) / $cols);
 		$result = '<table class="adminlinks">';
 
 		for ($tr = 0; $tr < $rows; $tr++)
 		{
 			$result.='<tr>';
 								
-			for($i  = 0 ; $i < 5; $i++)
+			for($i  = 0 ; $i < $cols; $i++)
 			{
-				$file = $tr * 5 + $i;
+				$file = $tr * $cols + $i;
 				if($file < count($files2))
 				{
 					$result.='<td>';
 					$result.='<div class="photo">';
 					$result.='<a rel="shadowbox[consolato];options={slideshowDelay:3}" href="/'.$image_dir.'pics/'.$files2[$file].'">';
-					$result.='<img class="gal" src="/'.$image_dir.'tmb/'.$files2[$file].'"/>'; 
+					$result.='<img  width="'.$width.'" class="gal" src="/'.$image_dir.'tmb/'.$files2[$file].'"/>'; 
 					$result.='</a>';
 					$result.= '</div>';
 					$result.= '</td>';	
